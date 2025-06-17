@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://127.0.0.1:5000';
 
 // Helper function to handle API responses
 const handleResponse = async (response) => {
@@ -21,7 +21,7 @@ const getAuthHeaders = () => {
 // Auth API calls
 export const authAPI = {
   register: async (userData) => {
-    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData)
@@ -30,7 +30,7 @@ export const authAPI = {
   },
 
   login: async (credentials) => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials)
@@ -39,7 +39,7 @@ export const authAPI = {
   },
 
   logout: async () => {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: 'POST',
       headers: getAuthHeaders()
     });
@@ -47,7 +47,7 @@ export const authAPI = {
   },
 
   getProfile: async () => {
-    const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
       headers: getAuthHeaders()
     });
     return handleResponse(response);
@@ -57,17 +57,17 @@ export const authAPI = {
 // Events API calls
 export const eventsAPI = {
   getAllEvents: async () => {
-    const response = await fetch(`${API_BASE_URL}/events`);
+    const response = await fetch(`${API_BASE_URL}/api/events`);
     return handleResponse(response);
   },
 
   getEventById: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/events/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/events/${id}`);
     return handleResponse(response);
   },
 
   createEvent: async (eventData) => {
-    const response = await fetch(`${API_BASE_URL}/events`, {
+    const response = await fetch(`${API_BASE_URL}/api/events`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(eventData)
@@ -76,7 +76,7 @@ export const eventsAPI = {
   },
 
   updateEvent: async (id, eventData) => {
-    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/events/${id}`, {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(eventData)
@@ -85,7 +85,7 @@ export const eventsAPI = {
   },
 
   deleteEvent: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/events/${id}`, {
       method: 'DELETE',
       headers: getAuthHeaders()
     });
@@ -93,7 +93,7 @@ export const eventsAPI = {
   },
 
   registerForEvent: async (eventId) => {
-    const response = await fetch(`${API_BASE_URL}/events/${eventId}/register`, {
+    const response = await fetch(`${API_BASE_URL}/api/events/${eventId}/register`, {
       method: 'POST',
       headers: getAuthHeaders()
     });
@@ -104,7 +104,7 @@ export const eventsAPI = {
 // Contact API calls
 export const contactAPI = {
   submitContact: async (contactData) => {
-    const response = await fetch(`${API_BASE_URL}/contact`, {
+    const response = await fetch(`${API_BASE_URL}/api/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(contactData)
@@ -116,14 +116,14 @@ export const contactAPI = {
 // User API calls
 export const userAPI = {
   getUserEvents: async () => {
-    const response = await fetch(`${API_BASE_URL}/user/events`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/events`, {
       headers: getAuthHeaders()
     });
     return handleResponse(response);
   },
 
   updateProfile: async (profileData) => {
-    const response = await fetch(`${API_BASE_URL}/user/profile`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(profileData)

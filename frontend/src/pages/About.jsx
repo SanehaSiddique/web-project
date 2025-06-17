@@ -34,28 +34,22 @@ const About = () => {
 
   const team = [
     {
-      name: 'Sarah Johnson',
+      name: 'Zainab Khalid',
       role: 'Founder & CEO',
       image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=300',
-      bio: 'With over 15 years in event management, Sarah founded EventPro to create unforgettable experiences.'
+      bio: 'With over 15 years in event management, Zainab founded EventPro to create unforgettable experiences.'
     },
     {
-      name: 'Michael Chen',
+      name: 'Saneha Siddique',
       role: 'Creative Director',
       image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=300',
-      bio: 'Michael brings artistic vision and innovative design to every event we create.'
+      bio: 'Saneha brings artistic vision and innovative design to every event we create.'
     },
     {
-      name: 'Emily Rodriguez',
+      name: 'Momina Muzaffar',
       role: 'Operations Manager',
       image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=300',
-      bio: 'Emily ensures flawless execution with her exceptional organizational skills and attention to detail.'
-    },
-    {
-      name: 'David Kim',
-      role: 'Technology Lead',
-      image: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=300',
-      bio: 'David leverages cutting-edge technology to enhance event experiences and streamline operations.'
+      bio: 'Momina ensures flawless execution with her exceptional organizational skills and attention to detail.'
     }
   ];
 
@@ -175,19 +169,12 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {team.map((member, index) => (
               <div 
                 key={index} 
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 group"
               >
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
                   <p className="text-blue-600 font-medium mb-3">{member.role}</p>
