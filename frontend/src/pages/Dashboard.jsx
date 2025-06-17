@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Users, DollarSign, TrendingUp, Plus, Edit, Trash2, Eye, Loader } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { userAPI, eventsAPI } from '../services/api';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -109,10 +110,12 @@ const Dashboard = () => {
               <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
               <p className="text-gray-600">Welcome back, {user?.name || 'User'}! Here's what's happening with your events.</p>
             </div>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 shadow-lg flex items-center">
-              <Plus className="h-5 w-5 mr-2" />
-              Create Event
-            </button>
+            <Link to={'/create-event'} className="inline-flex items-center">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 shadow-lg flex items-center">
+                <Plus className="h-5 w-5 mr-2" />
+                Create Event
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -125,11 +128,10 @@ const Dashboard = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
-                  activeTab === tab.id
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${activeTab === tab.id
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
               >
                 {tab.label}
               </button>
@@ -160,9 +162,8 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="mt-4 flex items-center">
-                    <span className={`text-sm font-medium ${
-                      stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
-                    }`}>
+                    <span className={`text-sm font-medium ${stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
+                      }`}>
                       {stat.change}
                     </span>
                     <span className="text-gray-600 text-sm ml-2">from last month</span>
@@ -185,11 +186,10 @@ const Dashboard = () => {
                       </div>
                       <div className="text-right">
                         <p className="font-semibold text-gray-900">${(event.price || 0) * (event.registeredCount || 0)}</p>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
-                          event.status === 'published' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}>
+                        <span className={`text-xs px-2 py-1 rounded-full ${event.status === 'published'
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-yellow-100 text-yellow-800'
+                          }`}>
                           {event.status || 'Draft'}
                         </span>
                       </div>
@@ -264,11 +264,10 @@ const Dashboard = () => {
                         {event.registeredCount || 0}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-2 py-1 text-xs rounded-full ${
-                          event.status === 'published' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}>
+                        <span className={`px-2 py-1 text-xs rounded-full ${event.status === 'published'
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-yellow-100 text-yellow-800'
+                          }`}>
                           {event.status || 'Draft'}
                         </span>
                       </td>
@@ -280,10 +279,12 @@ const Dashboard = () => {
                           <button className="text-blue-600 hover:text-blue-800 p-1">
                             <Eye className="h-4 w-4" />
                           </button>
-                          <button className="text-yellow-600 hover:text-yellow-800 p-1">
-                            <Edit className="h-4 w-4" />
-                          </button>
-                          <button 
+                          <Link to={`/update-event/${event._id}`} className="text-yellow-600 hover:text-yellow-800 p-1">
+                            <button className="text-yellow-600 hover:text-yellow-800 p-1">
+                              <Edit className="h-4 w-4" />
+                            </button>
+                          </Link>
+                          <button
                             onClick={() => handleDeleteEvent(event._id)}
                             className="text-red-600 hover:text-red-800 p-1"
                           >

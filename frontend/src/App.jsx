@@ -10,6 +10,8 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import CreateEvent from './pages/CreateEvent';
+import UpdateEvent from './pages/UpdateEvent';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/create-event" element={<CreateEvent />} />
+            <Route path="/update-event/:id" element={<UpdateEvent />} />
           </Routes>
         </main>
         <Footer />
