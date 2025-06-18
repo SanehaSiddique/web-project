@@ -10,7 +10,7 @@ const Events = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Conference', 'Corporate', 'Networking', 'Workshop', 'Social'];
+  const categories = ['All', 'Conference', 'Corporate', 'Networking', 'Workshop', 'Social', 'Concert'];
 
   useEffect(() => {
     fetchEvents();
