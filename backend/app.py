@@ -6,6 +6,8 @@ from routes.event_routes import event_bp
 from routes.contact_routes import contact_bp
 from routes.user_routes import user_bp
 from datetime import datetime
+from routes.ai_routes import ai_bp
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -19,6 +21,8 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(event_bp)
 app.register_blueprint(contact_bp)
 app.register_blueprint(user_bp)
+app.register_blueprint(ai_bp)
+
 
 # Error Handlers
 @app.errorhandler(404)

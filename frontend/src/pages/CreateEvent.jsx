@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Loader, Upload, Calendar, Clock, MapPin, Ticket, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { eventsAPI } from '../services/api'; 
+import { eventsAPI } from '../services/api';
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ddltxgibq/image/upload';
 const CLOUDINARY_PRESET = 'event_upload_preset';
@@ -73,6 +73,24 @@ const CreateEvent = () => {
     }
   };
 
+  const handleAIGenerate = async () => {
+    if (!formData.title) return setError("Please enter a title first.");
+
+    setLoading(true);
+    try {
+      const res = await axios.post("http://localhost:5000/api/ai/description", {
+        title: formData.title,
+        category: formData.category
+      });
+      setFormData(prev => ({ ...prev, description: res.data.description }));
+    } catch (err) {
+      console.error("AI generation error:", err);
+      setError("Failed to generate description");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10 mb-20 border border-gray-100">
       <div className="text-center mb-8">
@@ -85,7 +103,7 @@ const CreateEvent = () => {
           <p className="text-red-500 font-medium">{error}</p>
         </div>
       )}
-      
+
       {successMsg && (
         <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
           <p className="text-green-600 font-medium">{successMsg}</p>
@@ -125,6 +143,17 @@ const CreateEvent = () => {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               required
             />
+            <div className="text-right mt-4">
+              <button
+                type="button"
+                onClick={handleAIGenerate}
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg shadow hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 ease-in-out"
+              >
+                Generate Description with AI✨
+              </button>
+            </div>
+
+
           </div>
 
           {/* Date and Time */}
@@ -296,9 +325,9 @@ const CreateEvent = () => {
           ) : formData.image ? (
             <div className="mt-4">
               <p className="text-sm text-gray-600 mb-2">Preview:</p>
-              <img 
-                src={formData.image} 
-                alt="Preview" 
+              <img
+                src={formData.image}
+                alt="Preview"
                 className="h-48 w-full rounded-lg object-cover border border-gray-200"
               />
             </div>
